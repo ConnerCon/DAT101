@@ -6,8 +6,64 @@
 </head>
 <body>
 <script>
+  "use strict";
   /* write your code below this line  🙂 */
+// part 2
+//example using let
+  let a = 10;
+let b = 20, c = 30;
+let d = a + b + c; 
+//example using const
+const x = 1;
+const y = 2;
+const z = x + y;
+//example using mixed
+const price1 = 100;
+const price2 = 200;
+let total = price1 + price2;
+//example using the old var
+var f = 9, g = 10, h = 11;
+//example using the automatic way
+/*j = 50;
+k = 100;
+l = j + k;
+this will cause an error message in the browser */
 
+// part 3
+// variables with whole and decimal numbers
+let money = 15.99;
+const debt = 10;
+const totalMoney = money - debt;
+// variables with text using single and double quotes
+let courseName = "DAT101";
+const universityName = "UiA";
+let professorName = 'Dr. Smith';
+//simple object that contain other variables with value
+const student1 = { name: "Conner", age: 19, height: 157 };
+
+//part 4
+// variable with the value of pi (3.14) using implicit declaration
+const valuePI = 3.14; // <-- CHANGED from implicit to explicit declaration because of error message
+// console.log("the value of pi is:", valuePI); // <-- If you uncomment to show in browser
+
+//part 5
+// experimenting with modifying a constant
+const birthyear = 2006;
+// console.log("birthyear is:", birthyear); // <-- If you uncomment to show in browser
+
+//birthyear = 2001; // <-- If you uncomment this line, it will cause a TypeError
+//console.log("born in:", birthyear);
+
+// experimenting for fun
+let name = prompt("What's your name?");
+if (name)
+{ console.log("Hello " + name + ", welcome to the course!"); }
+else {
+  alert("You didn't enter a name");
+  name = prompt("What's your name?");
+  console.log("Hello " + name + ", welcome to the course!"); }
+
+  /* write your code above this line  🙂 */
 </script>
 </body>
 </html>
