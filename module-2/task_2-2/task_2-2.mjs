@@ -47,17 +47,36 @@ let leftover2 = leftover1 % 60;
 let minutes1 = leftover2 - leftover2 % 1;
 let seconds1 = (leftover2 % 1) * 60;
 
-printOut("6322.52 minutes is: " + days1 + " days" + hours1 + " hours" + minutes1 + "minutes and " + seconds1 "seconds");
+printOut("6322.52 minutes is: " + days1 + " days, " + hours1 + " hours, " + minutes1 + " minutes, and " + seconds1.toFixed(0) + " seconds." );
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let usd = 54;
+
+let nokPerUsd = 76 / 8.6;
+let nok = usd * nokPerUsd;
+let totalNok = nok - (nok % 1);
+
+printOut(usd + " USD = " + totalNok + " NOK" );
+printOut(totalNok + " NOK = " + usd + " USD" );
 printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let quote = "There is much between heaven and earth that we do not understand.";
+
+let length = Text.length;
+let character19 = text[19];
+let part = Text.slice(35,43);
+let index = text.indexOf("earth");
+
+printOut(quote);
+printOut("This text has " + length + " characters.");
+printOut("The character at position 19 is: " + character19);
+printOut("The substring of 35 and 8 places is: " + part);
+printOut("The word 'earth' starts at pos " + index);
+
 printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
