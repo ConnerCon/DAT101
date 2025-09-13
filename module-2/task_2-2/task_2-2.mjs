@@ -16,10 +16,10 @@ let meter = 25;
 let centimeter = 34;
 let inch = 25.4;
 
-let tomilimeter = (meter * 1000 + centimeter * 10); //first make m and cm to mm
-let toinch = (tomilimeter / inch);
+let toMilimeter = (meter * 1000 + centimeter * 10); //first make m and cm to mm
+let toInch = (toMilimeter / inch);
 
-printOut("25 meters and 34 centimeters = " + toinch.toFixed(2) + " inches");
+printOut("25 meters and 34 centimeters = " + toInch.toFixed(2) + " inches");
 printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
@@ -29,17 +29,25 @@ let hours = 12;
 let minutes = 14;
 let seconds = 45;
 
-let tominutes = (days * 1440 + (hours * 60) + minutes + seconds / 60); //convert everthing to minutes and sums it
+let toMinutes = (days * 1440 + (hours * 60) + minutes + seconds / 60); //convert everthing to minutes and sums it
 
-printOut("3 days, 12 hours, 14 minutes, and 45 seconds = " + tominutes + " minutes");
+printOut("3 days, 12 hours, 14 minutes, and 45 seconds = " + toMinutes + " minutes");
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-let 
-let totalminutes = 6322.52;
+let totalmin = 6322.52
 
-printOut("Replace this with you answer!");
+let days1 = (totalmin - totalmin % 1440) /1440;
+let leftover1 = totalmin % 1440;
+
+let hours1 = (leftover1 - leftover1 % 60) / 60;
+let leftover2 = leftover1 % 60;
+
+let minutes1 = leftover2 - leftover2 % 1;
+let seconds1 = (leftover2 % 1) * 60;
+
+printOut("6322.52 minutes is: " + days1 + " days" + hours1 + " hours" + minutes1 + "minutes and " + seconds1 "seconds");
 printOut(newLine);
 
 printOut("--- Part 5 ----------------------------------------------------------------------------------------------");
