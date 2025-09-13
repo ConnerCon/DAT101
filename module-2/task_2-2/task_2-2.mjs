@@ -66,12 +66,13 @@ printOut("--- Part 6 -----------------------------------------------------------
 /* Put your code below here!*/
 let text = "There is much between heaven and earth that we do not understand.";
 
-let length = Text.length;
+let length = text.length;
 let character19 = text[19];
-let part = Text.slice(35,43);
+let part = text.substring(35,43);
 let index = text.indexOf("earth");
 
 printOut(text);
+printOut(newLine);
 printOut("This text has " + length + " characters.");
 printOut("The character at position 19 is: " + character19);
 printOut("The substring of 35 and 8 places is: " + part);
