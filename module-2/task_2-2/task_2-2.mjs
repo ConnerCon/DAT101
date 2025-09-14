@@ -82,21 +82,65 @@ printOut(newLine);
 
 printOut("--- Part 7 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+//Is 5 greater than 3?
+printOut("5 > 3 is " + (5 > 3));
+
+//Is 7 greater than or equal to 7?
+printOut("7 >= 7 is " + (7 >= 7));
+
+//Is "a" greater than "b"?
+printOut("\"a\" > \"b\" is " + ("a" > "b"));
+
+//Is "1" less than "a"?
+printOut("\"1\" > \"a\" is " + ("1" > "a"));
+
+//Is "2500" less than "abcd"?
+printOut("\"2500\" < \"abcd\" is " + ("2500" < "abcd"));
+
+//"arne" is not equal to "thomas".
+printOut("\"arne\" != \"thomas\" is " + ("arne" != "thomas"));
+
+//(2 equals 5) is this statement true?
+printOut("(2 === 5) === true is " + ((2 === 5) === true));
+
+//("abcd" is greater than "bcd") is this statement false?
+printOut("(\"abcd\" > \"bdc\") === false is " + (("abcd" > "bdc") === false));
+
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+let text1 = "254";
+let text2 = "57.23";
+let text3 = "25 kroner";
+
+let number1 = +text1;
+let number2 = +text2;
+
+printOut('"' + text1 + '"' + ' = ' + number1);
+printOut('"' + text2 + '"' + ' = ' + number2);
+printOut('"' + text3 + '" = ' + parseInt(text3));
+
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+let r = Math.floor(Math.random() * 360) + 1;
+printOut('"r" = ' + r);
+
 printOut(newLine);
 
 /* Task 10*/
 printOut("--- Part 10 ---------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+
+let totaldays = 131;
+let weeks = Math.floor(totaldays / 7);
+let extraDays = totaldays % 7;
+
+printOut("131 days = " + weeks + " weeks and " + extraDays + " days.");
+
 printOut(newLine);
