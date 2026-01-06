@@ -172,12 +172,54 @@ printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("...");
+function AdjustString(aText, aMaxSize, aChar, aInsertAtEnd) {
+  let adjustedText = aText;
+  let length = aText.length;
+  while (length < aMaxSize) {
+    if (aInsertAtEnd) {
+      adjustedText += aChar;
+    } else {
+      adjustedText = aChar + adjustedText;
+    }
+    length++;
+  }
+  printOut(`"${adjustedText}"`);
+  return adjustedText;
+}
+AdjustString("Hello", 50, "&nbsp;", true);
+AdjustString("This is a right aligned text.", 50, "&nbsp;", false);
 printOut(newLine);
 
 printOut("--- Part 9 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("...");
+
+function MathExpression(lines) {
+  let currentNumber = 1;
+
+  for (let line = 1; line <= lines; line++) {
+    let leftNums = [];
+    let rightNums = [];
+
+    for (let i = 0; i < line + 1; i++) {
+      leftNums.push(currentNumber++);
+    }
+
+    for (let i = 0; i < line; i++) {
+      rightNums.push(currentNumber++);
+    }
+
+    const leftStr = leftNums.join(" ").padEnd(25, " ");
+    const rightStr = rightNums.join(" ");
+
+    printOut(`${leftStr} = ${rightStr}`);
+  }
+
+  printOut("Mathematics is fun!");
+}
+
+MathExpression(7);
+
+
 printOut(newLine);
 
 /* Task 10*/
