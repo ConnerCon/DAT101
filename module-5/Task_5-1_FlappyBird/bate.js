@@ -11,3 +11,5 @@ export class TBate extends TSprite {
     super(aSpcvs, aSPI, 200, 100);
   }
 }
+
+//heloooooo please
