@@ -29,9 +29,11 @@ const SpriteInfoList = {
   medal:        { x: 985 , y: 635 , width: 44   , height: 44  , count: 4  },
 };
 
-const EGameStatus = { idle: 0 };
+export const EGameStatus = { idle: 0, gaming: 1, heroIsDead: 2, gameOver: 3,
+  state: 1
+ };
 const background = new TBackground(spcvs, SpriteInfoList);
-const hero = new THero(spcvs, SpriteInfoList.hero1);
+export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
 
 
@@ -45,17 +47,19 @@ function spawnObstacle(){
 
 function animateGame(){
   hero.animate();
+  if (EGameStatus.state === EGameStatus.gaming){
   background.animate();
   let deleteObstacle = false;
   for(let i = 0; i < obstacles.length; i++){
     const obstacle = obstacles[i];
     obstacle.animate();
-    if(obstacle.x < 100){
+    if(obstacle.x < -50 ){
       deleteObstacle = true;
     }
   }
   if(deleteObstacle){
     obstacles.splice(0,1);
+  }
   }
 }
 
@@ -88,7 +92,9 @@ function onKeyDown(aEvent) {
   switch (aEvent.code) {
     case "Space":
       console.log("Space key pressed, flap the hero!");
-      hero.flap();  
+      if (EGameStatus.state !== EGameStatus.heroIsDead){
+        hero.flap();
+      }  
       break;
   }
 } // end of onKeyDown
