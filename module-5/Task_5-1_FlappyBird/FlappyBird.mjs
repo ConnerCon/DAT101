@@ -31,13 +31,14 @@ const SpriteInfoList = {
   medal:        { x: 985 , y: 635 , width: 44   , height: 44  , count: 4  },
 };
 
-export const EGameStatus = { idle: 0, gaming: 1, heroIsDead: 2, gameOver: 3, 
+export const EGameStatus = { idle: 0, countdown: 1, gaming: 2, heroIsDead: 3, gameOver: 4, 
   state: 0 };
 const background = new TBackground(spcvs, SpriteInfoList);
 export const hero = new THero(spcvs, SpriteInfoList.hero1);
 const obstacles = [];
 const baits = [];
-const menu = new TMenu(spcvs, SpriteInfoList);
+export const menu = new TMenu(spcvs, SpriteInfoList);
+let obstaclePassed = false;
 
 //--------------- Functions ----------------------------------------------//
 export function startGame(){
@@ -74,7 +75,9 @@ function animateGame() {
   if(eaten >= 0){
     console.log("Eaten!");
     baits.splice(eaten, 1);
+    hero.eat();
   }
+  //if eats bait, gain 2 points - HOME TASK
 
   if (EGameStatus.state === EGameStatus.gaming) {
     background.animate();
@@ -84,6 +87,12 @@ function animateGame() {
       obstacle.animate();
       if (obstacle.x < -50) {
         deleteObstacle = true;
+        obstaclePassed = false;
+      } else if((obstacle.x + obstacle.width) < hero.x){
+        if(!obstaclePassed){
+        menu.incGameScore(1);
+        obstaclePassed = true;
+        }
       }
     }
     if (deleteObstacle) {

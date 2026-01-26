@@ -1,12 +1,20 @@
 "use strict";
 import { TSprite } from "libSprite";
-import { EGameStatus } from "./FlappyBird.mjs"; 
+import { EGameStatus, menu } from "./FlappyBird.mjs"; 
 import { TSineWave } from "lib2d";
+import { TSoundFile } from "libSound";
+
+const fnFood = "./Media/food.mp3";
+const fnHeroIsDead = "./Media/heroIsDead.mp3";
+const fnGameOver = "./Media/gameOver.mp3";
 
 export class THero extends TSprite {
   #gravity;
   #speed;
   #wave;
+  #sfFood;
+  #sfHeroIsDead;
+  #sfGameOver;
   constructor(aSpcvs, aSPI) {
     super(aSpcvs, aSPI, 100, 100);
     this.animationSpeed = 20;
@@ -14,7 +22,20 @@ export class THero extends TSprite {
     this.#speed = 0;
     this.#wave = new TSineWave(1,1);
     this.y += this.#wave.value;
+    this.#sfFood = null;
+    this.#sfHeroIsDead = null;
+    this.#sfGameOver = null;
   }
+
+  eat() {
+    if (this.#sfFood === null) {
+      this.#sfFood = new TSoundFile(fnFood);
+    } else {
+      this.#sfFood.stop();
+    }
+    this.#sfFood.play();
+  }
+
 
  animate() {
     const hasGravity = 
@@ -31,12 +52,20 @@ export class THero extends TSprite {
         }
       } else {
         EGameStatus.state = EGameStatus.gameOver;
+        menu.stopSound();
         this.animationSpeed = 0;
+        this.#sfGameOver = new TSoundFile(fnGameOver);
+        this.#sfGameOver.play();
       }
     }else if(EGameStatus.state === EGameStatus.idle){
       this.y += this.#wave.value;
     }
   } // End of animate
+
+dead(){
+  this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
+  this.#sfHeroIsDead.play();
+}
 
   flap() {
     this.#speed = -3.5;
