@@ -4,10 +4,12 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 // Counting Up and Down
-let output = "";
-for (let i = 1; i <= 10; i++) output += i + (i < 10 ? "," : ",");
-for (let i = 10; i >= 1; i--) output += i + (i > 1 ? "," : "");
-printOut(output);
+let outPut1 = "";
+let outPut2 = "";
+for (let i = 1; i <= 10; i++) outPut1 += i + (i < 10 ? "," : ",");
+for (let i = 10; i >= 1; i--) outPut2 += i + (i > 1 ? "," : "");
+printOut(outPut1);
+printOut(outPut2);
 
 printOut(newLine);
 
@@ -51,26 +53,21 @@ printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-// Prime Number Hunter
 
-let result = "";
-
-for (let num = 2; num < 200; num++) {
-    let divisor = 2;
-    let prime = true;
-
-    while (divisor < num) {
-        if (num % divisor === 0) {
-            prime = false;
-            break;
-        }
-        divisor++;
-    }
-
-    if (prime) result += num + (num < 199 ? "," : "");
+let resultPrime = "";
+for (let num = 1; num < 200; num++) {
+  let divisor = num - 1;
+  let isPrime = true;
+  while (divisor > 1 && isPrime) {
+    let rest = num % divisor; 
+    isPrime = rest != 0;
+    divisor--;
+  }
+  if (isPrime) {
+    resultPrime += " " + num;
+  }
 }
-
-printOut(result);
+printOut(resultPrime);
 
 printOut(newLine);
 
