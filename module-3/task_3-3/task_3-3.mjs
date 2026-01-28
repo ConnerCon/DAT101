@@ -104,35 +104,40 @@ printOut(newLine);
 
 printOut("--- Part 6 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-function priceWithoutVAT(gross, vatGroup) {
-    let vatPercent;
 
-    switch (vatGroup.toLowerCase()) {
-        case "normal":
-            vatPercent = 25;
-            break;
-        case "food":
-            vatPercent = 15;
-            break;
-        case "hotel":
-        case "transport":
-        case "cinema":
-            vatPercent = 10;
-            break;
-        default:
-            printOut(vatGroup + " is unknown tax-group!");
-            return NaN;
-    }
-
-    let net = (100 * gross) / (vatPercent + 100);
-    printOut(gross + " is " + net.toFixed(2) + " without tax");
-    return net;
+function priceWithoutTax(aGrossAmount, aTaxGroup) {
+  const taxGroup = aTaxGroup.toLowerCase();
+  let taxRate = 0;
+  switch (taxGroup) {
+    case "normal":
+      taxRate = 25;
+      break;
+    case "food":
+      taxRate = 15;
+      break;
+    case "hotel":
+    case "transport":
+    case "cinema":
+      taxRate = 10;
+      break;
+    default:
+      printOut("Error: Unknown tax group!");
+      return;
+  }
+  const netAmount = (100 * aGrossAmount) / (taxRate + 100);
+  printOut(`Gross amount: ${aGrossAmount.toFixed(2)}`);
+  printOut(`Tax group: ${aTaxGroup}, Tax rate: ${taxRate}%`);
+  printOut(`Net amount: ${netAmount.toFixed(2)}`);
+  printOut("");
 }
 
-priceWithoutVAT(100, "normal");
-priceWithoutVAT(150, "food");
-priceWithoutVAT(50, "hotel");
-priceWithoutVAT("Textile", "goblins");
+priceWithoutTax(100, "Normal");
+priceWithoutTax(100, "Food");
+priceWithoutTax(100, "Hotel");
+priceWithoutTax(100, "Transport");
+priceWithoutTax(100, "Cinema");
+priceWithoutTax(100, "Car");
+
 
 printOut(newLine);
 
@@ -197,27 +202,25 @@ function MathExpression(lines) {
   let currentNumber = 1;
 
   for (let line = 1; line <= lines; line++) {
-    let leftNums = [];
-    let rightNums = [];
+    let leftNums = 0;
+    let rightNums = 0;
 
     for (let i = 0; i < line + 1; i++) {
-      leftNums.push(currentNumber++);
+      leftNums += currentNumber++;
     }
 
     for (let i = 0; i < line; i++) {
-      rightNums.push(currentNumber++);
+      rightNums += currentNumber++;
     }
-
-    const leftStr = leftNums.join(" ").padEnd(25, " ");
-    const rightStr = rightNums.join(" ");
-
-    printOut(`${leftStr} = ${rightStr}`);
+if (leftNums !== rightNums) {
+      printOut(`Test failed at line ${line}: Left sum (${leftNums}) != Right sum (${rightNums})`);
+      return;
+    }
   }
-
-  printOut("Mathematics is fun!");
+  printOut("Maths fun!");
 }
 
-MathExpression(7);
+MathExpression(200);
 
 
 printOut(newLine);
