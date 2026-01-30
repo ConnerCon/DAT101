@@ -157,12 +157,11 @@ for(let i = 0; i < p8randomArray.length; i++){
   }
 }
 
-let part9Text1 = "Numbers and their frequency:" + newLine;
+let p9Text1 = "Numbers and their frequency:" + newLine;
 for(const number in frequency){
-  part9Text1 += `${number}: ${frequency[number]}` + newLine;
+  p9Text1 += `${number}: ${frequency[number]}` + newLine;
 }
-printOut(part9Text1);
-
+printOut(p9Text1);
 const freqToNums = {};
 for(const num in frequency){
   const count = frequency[num];
@@ -170,13 +169,13 @@ for(const num in frequency){
   freqToNums[count].push(Number(num));
 }
 
-let part9Text2 = "Frequencies and corresponding numbers (most frequent first):" + newLine;
+let p9Text2 = "Frequencies and corresponding numbers (most frequent first):" + newLine;
 const sortedFreqs = Object.keys(freqToNums).map(Number).sort((a,b) => b-a);
 sortedFreqs.forEach(count => {
   const nums = freqToNums[count].sort((a,b) => a-b);
-  part9Text2 += `${count}: ${nums.join(", ")}` + newLine;
+  p9Text2 += `${count}: ${nums.join(", ")}` + newLine;
 });
-printOut(part9Text2);
+printOut(p9Text2);
 printOut(newLine);
 
 /* Task 10*/
