@@ -4,6 +4,7 @@ import { TSpriteCanvas } from "libSprite";
 import { TGameBoard } from "./gameBoard.js"
 import { addRandomButton } from "./sequence.js";
 
+
 // prettier-ignore
 export const SpriteInfoList = {
   Background:     { x: 0, y:    0, width: 720, height: 720, count:  1 },
@@ -25,6 +26,15 @@ export const gameProps = {
 };
 
 //--------------- Functions ----------------------------------------------//
+export function updateRound(aRound){
+  gameBoard.spRound.value = aRound;
+}
+
+export function gameOver(){
+  EGameStatusType.state = EGameStatusType.GameOver;
+  gameBoard.gameOver();
+}
+
 export function spawnColorButton(){
   EGameStatusType.state = EGameStatusType.Computer;
   const colorButtons = gameBoard.colorButtons;

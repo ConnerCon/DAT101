@@ -45,9 +45,8 @@ export class TColorButton extends TSpriteButton{
       this.#sound.stop();
     }
     if(EGameStatusType.state === EGameStatusType.Gamer){
-     testOfUserInput(this); 
+      testOfUserInput(this);
     }
-    
   }
 
   createSound(aIndex){
