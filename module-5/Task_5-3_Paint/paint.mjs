@@ -1,7 +1,7 @@
 "use strict";
 
 import { TMenu, EActionType, EColorType, EShapeType, EStrokeSizeType } from "./menu.js";
-import { } from "./shape.js"
+import { newDrawing, deleteShape, moveUp, moveDown } from "./shape.js"
 /*
 📝 TODO: Create a Shape System
 ═══════════════════════════════════════════════════════════════════
@@ -86,7 +86,7 @@ You need to build this file with the following features:
  *    When user clicks a menu button (e.g., "Circle"), this object gets updated
  *    So when drawing a new shape, the app knows which settings to use
  */
-const newShapeType = { ShapeType: EShapeType.Line, FillColor: EColorType.Black, StrokeColor: EColorType.Black, StrokeSize: EStrokeSizeType.Thin };
+export const newShapeType = { ShapeType: EShapeType.Line, FillColor: EColorType.Black, StrokeColor: EColorType.Black, StrokeSize: EStrokeSizeType.Thin };
 
 /**
  * 🎮 CREATE THE MENU TOOLBAR
@@ -126,15 +126,19 @@ function menuButtonClick(aEvent) {
       switch (value) {
         case EActionType.New:
           console.log("✨ New button clicked → Clear the canvas!");
+          newDrawing();
           break;
         case EActionType.Eraser:
           console.log("🗑️  Eraser button clicked → Delete selected shape");
+          deleteShape();
           break;
         case EActionType.MoveUp:
           console.log("⬆️  Move Up button clicked → Bring selected shape to front");
+          moveUp();
           break;
         case EActionType.MoveDown:
           console.log("⬇️  Move Down button clicked → Send selected shape to back");
+          moveDown();
           break;
       }
       break;
@@ -159,3 +163,4 @@ function menuButtonClick(aEvent) {
 
 // 🔗 Listen for menu button clicks
 menu.addEventListener("menuButtonClick", menuButtonClick);
+newDrawing();
