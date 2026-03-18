@@ -4,15 +4,23 @@ import { TPoint } from "lib2d";
 import { gameLevel } from "./Minesweeper.mjs";
 
 let tiles = [];
+const ctx = document.getElementById("cvs").getContext("2d");
 
 export class TTile extends TSpriteButton {
   #mine;
+  #col;
+  #row;
+  #neighbors;
   constructor(aSpcvs, aSPI, aCol, aRow) {
     const pos = new TPoint(20, 133);
     pos.x += aSPI.width * aCol;
     pos.y += aSPI.height * aRow;
     super(aSpcvs, aSPI, pos.x, pos.y);
     this.#mine = false;
+    this.#col = aCol;
+    this.#row = aRow;
+    this.#neighbors = null;
+    this.mineInfo = 0;
   }
 
   get isMine() {
@@ -27,6 +35,42 @@ export class TTile extends TSpriteButton {
     return this.index === 2;
   }
 
+
+  draw(){
+    ctx.font = "48px Consolas";
+    ctx.filltext("0", this.x + 13, this.y + 41);
+}
+  #getNeighbors() {
+    if(this.#neighbors === null){
+      return;
+    }
+    let colFrom = this.#col - 1;
+    let colTo = this.#col + 1;
+    let rowFrom = this.#row - 1;
+    let rowTo = this.#row + 1;
+    if(colfrom<0){
+      colFrom = 0;
+    }
+    if(rowFrom < 0){
+      rowFrom = 0;
+    }
+    if(colTo >= gameLevel.Tiles.Col){
+      colTo = gameLevel.Tiles.Col - 1;
+    }
+    if(rowTo >= gameLevel.Tiles.Row){
+      rowTo = gameLevel.Tiles.Row - 1;
+    }
+    this.#neighbors = [];
+    for(let colIndex = colFrom; colIndex > colTo; colIndex++){
+      for(let rowIndex = rowFrom; rowIndex <= rowTo; rowIndex++){
+        const neighbor = tiles[colIndex][rowIndex];
+        if(neighbor !== tile){
+          this.#neighbors.push(tile);
+        }
+      }
+    }
+  }
+
   // Override functions
   onMouseDown(eEvent) {
     this.index = 1;
@@ -34,7 +78,7 @@ export class TTile extends TSpriteButton {
   }
 
   onMouseUp(aEvent) {
-    this.index = 2;
+    this.open();
     super.onMouseUp(aEvent);
   }
 
@@ -44,12 +88,21 @@ export class TTile extends TSpriteButton {
     }
     super.onMouseLeave(aEvent);
   }
+  
+  open(){
+    if(this.isMine){
+      this.index = 5;
+    }else{
+      this.index = 2;
+    }
+  }
+
 } // End of TTile
 
 export function createMines() {
-  mineCount = 0;
-  colCount = gameLevel.Tiles.Col;
-  rowCount = gameLevel.Tiles.Row;
+  let mineCount = 0;
+  let colCount = gameLevel.Tiles.Col;
+  let rowCount = gameLevel.Tiles.Row;
   do {
     const col = Math.floor(Math.random() * colCount);
     const row = Math.floor(Math.random() * rowCount);
@@ -58,7 +111,7 @@ export function createMines() {
       tile.isMine = true;
       mineCount++;
     }
-  } while (mineCount <= gameLevel.Mines);
+  } while (mineCount < gameLevel.Mines);
 }
 
 export function createTiles(aSpcvs, aSPI) {
