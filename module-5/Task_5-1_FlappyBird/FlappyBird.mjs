@@ -6,12 +6,14 @@ import { THero } from "./hero.js";
 import { TObstacle } from "./obstacle.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";
-
+export let soundMuted = false;
 //--------------- Objects and Variables ----------------------------------//
 const chkMuteSound = document.getElementById("chkMuteSound");
 const rbDayNight = document.getElementsByName("rbDayNight");
 const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
+
+
 
 // prettier-ignore
 const SpriteInfoList = {
@@ -144,6 +146,9 @@ function onKeyDown(aEvent) {
 
 function setSoundOnOff() {
   // Mute or unmute the game sound based on checkbox
+  soundMuted = chkMuteSound.checked;
+  console.log(`Sound muted: ${soundMuted}`);
+  menu.setSoundMute(soundMuted);
 } // end of setSoundOnOff
 
 function setDayNight(aEvent) {

@@ -1,6 +1,6 @@
 "use strict";
-import { TSprite, TSpriteButton, TSpriteNumber} from "libSprite";
-import { startGame } from "./FlappyBird.mjs";
+import { TSprite, TSpriteButton, TSpriteNumber } from "libSprite";
+import { startGame, EGameStatus, soundMuted } from "./FlappyBird.mjs";
 import { TSoundFile } from "libSound";
 
 const fnCountDown = "./Media/countDown.mp3";
@@ -33,6 +33,16 @@ export class TMenu{
     this.#sfRunning.stop();
   }
 
+  setSoundMute(aIsMuted){
+    if(aIsMuted){
+      if(this.#sfRunning) this.#sfRunning.stop();
+    }else{
+      if(this.#sfRunning && EGameStatus.state === EGameStatus.gaming){
+        this.#sfRunning.play();
+      }
+    }
+  }
+
   draw(){
     this.#spTitle.draw();
     this.#spPlayBtn.draw();
@@ -48,7 +58,7 @@ export class TMenu{
       this.#spCountDown.visible = false;
       this.#spTitle.hidden = true;
       this.#sfRunning = new TSoundFile(fnRunning);
-      this.#sfRunning.play();
+      if(!soundMuted) this.#sfRunning.play();
       startGame();
     }
     
@@ -60,7 +70,9 @@ export class TMenu{
     this.#spCountDown.visible = true;
     this.#spCountDown.value = 3;
     this.#sfCountDown = new TSoundFile(fnCountDown);
-    this.#sfCountDown.play();
+    if (!soundMuted) {
+      this.#sfCountDown.play();
+    }
     setTimeout(this.countDown.bind(this), 1000);
   }
 
