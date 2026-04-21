@@ -14,6 +14,11 @@ export class TMenu{
   #sfCountDown;
   #sfRunning;
   #spGameScore;
+  #spGameOver;
+  #spMedal;
+  #spScoreBoardFinal;
+  #spScoreBoardHigh;
+  #spHighScores;
   constructor(aSpcvs, aSPI){
     this.#spTitle = new TSprite(aSpcvs, aSPI.flappyBird, 200, 100);
     this.#spPlayBtn = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 240, 180);
@@ -27,6 +32,15 @@ export class TMenu{
     this.#sfRunning = null;
     this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 10, 10);
     this.#spGameScore.alpha = 0.5;
+    this.#spGameOver = new TSprite(aSpcvs, aSPI.gameOver, 200, 150);
+    this.#spGameOver.visible = false;
+    this.#spMedal = new TSprite(aSpcvs, aSPI.medal, 225, 195);
+    this.#spMedal.visible = false;
+    this.#spScoreBoardFinal = new TSpriteNumber(aSpcvs, aSPI.numberBig, 320, 160);
+    this.#spScoreBoardFinal.visible = false;
+    this.#spScoreBoardHigh = new TSpriteNumber(aSpcvs, aSPI.numberBig, 320, 210);
+    this.#spScoreBoardHigh.visible = false;
+    this.#spHighScores = [0];
     
   }
 
@@ -85,5 +99,22 @@ export class TMenu{
     }
     setTimeout(this.countDown.bind(this), 1000);
   }
-
+  showGameOver(aFinalScore, aHighScore) {
+    if (this.#sfRunning != null) {this.#sfRunning.stop();}  
+    this.#spTitle.hidden = false;
+    this.#spGameScore.visible = false;
+    this.#spGameOver.visible = true;
+    this.#spScoreBoardFinal.value = aFinalScore;
+    this.#spScoreBoardFinal.visible = true;
+    this.#spPlayBtn.hidden = false;
+    this.#sfRunning.stop();
+   if (this.#spGameScore.value > this.#spHighScores.at(-1)) {this.#spHighScores.push(this.#spGameScore.value);
+   aHighScore = this.#spHighScores.at(-1);} 
+    this.#spScoreBoardHigh.value = this.#spHighScores.at(-1);
+    this.#spScoreBoardHigh.visible = true;
+    if (aFinalScore >= 10) {this.#spMedal.index = 1;} else if (aFinalScore >= 5) {
+    this.#spMedal.index = 2;} else if (aFinalScore >= 2) {
+    this.#spMedal.index = 3;} else {this.#spMedal.index = 0;}
+    this.#spMedal.hidden = false;
+  }
 }
