@@ -9,6 +9,7 @@ const fnRunning = "./Media/running.mp3";
 export class TMenu{
   #spTitle;
   #spPlayBtn;
+  #spGetReady;
   #spCountDown;
   #sfCountDown;
   #sfRunning;
@@ -17,12 +18,16 @@ export class TMenu{
     this.#spTitle = new TSprite(aSpcvs, aSPI.flappyBird, 200, 100);
     this.#spPlayBtn = new TSpriteButton(aSpcvs, aSPI.buttonPlay, 240, 180);
     this.#spPlayBtn.addEventListener("click", this.spPlayBtnClick.bind(this));
+    this.#spGetReady = new TSprite(aSpcvs, aSPI.infoText, 200, 100);
+    this.#spGetReady.index = 0; 
+    this.#spGetReady.hidden = true;
     this.#spCountDown = new TSpriteNumber(aSpcvs, aSPI.numberBig, 280, 190);
     this.#spCountDown.visible = false;
     this.#sfCountDown = null;
     this.#sfRunning = null;
     this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.numberSmall, 10, 10);
     this.#spGameScore.alpha = 0.5;
+    
   }
 
   incGameScore(aScore){
@@ -46,6 +51,7 @@ export class TMenu{
   draw(){
     this.#spTitle.draw();
     this.#spPlayBtn.draw();
+    this.#spGetReady.draw();
     this.#spCountDown.draw();
     this.#spGameScore.draw();
   }
@@ -56,6 +62,7 @@ export class TMenu{
       setTimeout(this.countDown.bind(this), 1000);  
     }else{
       this.#spCountDown.visible = false;
+      this.#spGetReady.hidden = true;
       this.#spTitle.hidden = true;
       this.#sfRunning = new TSoundFile(fnRunning);
       if(!soundMuted) this.#sfRunning.play();
@@ -66,7 +73,10 @@ export class TMenu{
 
   spPlayBtnClick(){
     console.log("Click!");
+    EGameStatus.state = EGameStatus.countDown;
     this.#spPlayBtn.hidden = true;
+    this.#spTitle.hidden = true;
+    this.#spGetReady.hidden = false;
     this.#spCountDown.visible = true;
     this.#spCountDown.value = 3;
     this.#sfCountDown = new TSoundFile(fnCountDown);
