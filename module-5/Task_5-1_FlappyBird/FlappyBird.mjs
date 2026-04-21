@@ -155,7 +155,16 @@ function setDayNight(aEvent) {
   // Set day or night mode based on radio buttons
   // Day mode is when value is 1, night mode is 0, you can use this as a boolean, 1=true, 0=false
   // e.g., isDayMode = (aEvent.target.value == 1);
+  const isDayMode = (aEvent.target.value == 1);
   console.log(`Day/Night mode changed: ${aEvent.target.value}`);
+  
+  // Update background
+  background.setDayNight(isDayMode);
+  
+  // Update all obstacles currently on screen
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].setDayNight(isDayMode);
+  }
 } // end of setDayNight
 
 //--------------- Main Code ----------------------------------------------//

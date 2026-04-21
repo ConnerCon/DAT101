@@ -65,4 +65,14 @@ export class TObstacle{
     }
   }
 
+  setDayNight(isDayMode){
+    if(isDayMode){
+      this.#spUp.index = 3;
+      this.#spDown.index = 2;
+    }else{
+      this.#spUp.index = 1;
+      this.#spDown.index = 0;
+    }
+  }
+
 }// End of class TObstacle
