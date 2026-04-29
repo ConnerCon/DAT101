@@ -37,7 +37,8 @@ export const GameProps = {
   gameBoard: null,
   gameStatus: EGameStatus.Idle,
   snake: null,
-  bait: null
+  bait: null,
+  score: 0 //Tracks points
 };
 
 //------------------------------------------------------------------------------------------
@@ -51,11 +52,15 @@ export function newGame() {
   gameSpeed = 4; // Reset game speed
 }
 
+
 export function baitIsEaten() {
 
   console.log("Bait eaten!");
-  /* Logic to increase the snake size and score when bait is eaten */
+  GameProps.score += 100; // Add 100 to the score, and store it
+  console.log("Score: ", GameProps.score); //Checks if it works
 
+  GameProps.bait.update(); //Move the bait to a new position
+  GameProps.snake.grow();
   increaseGameSpeed(); // Increase game speed
 }
 
