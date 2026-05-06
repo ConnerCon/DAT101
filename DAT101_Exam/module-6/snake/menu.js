@@ -25,8 +25,8 @@ export class TMenu {
         this.#spGameScore.justify = ESpriteNumberJustifyType.Left;
         this.#spGameScore.visible = true;
 
-        //PlAY BUTTON
-        //Center the button
+        // PlAY BUTTON
+        // Center the button
         const playX = 355;
         const playY = 241;
 
@@ -34,21 +34,20 @@ export class TMenu {
         this.#spPlay.animated = true;
         this.#spPlay.visible = true;
 
-        //RESUME BUTTON
+        // RESUME BUTTON
         this.#spResume = new TSprite(aSpcvs, aSPI.Resume, 355, 241);
         this.#spResume.animated = true;
         this.#spResume.visible = false; // Hidden at start
         
+        // EVENTLISTNERS
         cvs.addEventListener("click", (e) => {
         if (GameProps.gameStatus === EGameStatus.Idle) {
         GameProps.gameStatus = EGameStatus.Playing;
         this.#spPlay.visible = false;
         } else if (GameProps.gameStatus === EGameStatus.Playing) {
         GameProps.gameStatus = EGameStatus.Pause;
-        this.#spResume.visible = true;  // show resume button
         } else if (GameProps.gameStatus === EGameStatus.Pause) {
-        GameProps.gameStatus = EGameStatus.Playing;
-        this.#spResume.visible = false;} // hide resume button
+        GameProps.gameStatus = EGameStatus.Playing;}
         });
 
 
@@ -59,7 +58,7 @@ export class TMenu {
         this.#spGameScore.value = GameProps.score; // Reads GameProps.score
         this.#spGameScore.draw();
         this.#spPlay.draw();
-        this.#spResume.visible = GameProps.gameStatus === EGameStatus.Pause;
+        this.#spResume.visible = GameProps.gameStatus === EGameStatus.Pause; // Resume shows based on GameStatus
         this.#spResume.draw();
     }
 
