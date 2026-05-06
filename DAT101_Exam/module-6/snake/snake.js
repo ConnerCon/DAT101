@@ -97,6 +97,7 @@ class TSnakeHead extends TSnakePart {
       const boardCellInfo = GameProps.gameBoard.getCell(this.boardCell.row, this.boardCell.col);
       collision = boardCellInfo.infoType === EBoardCellInfoType.Snake;
     }
+    
     return collision; // Collision detected
   }
 }

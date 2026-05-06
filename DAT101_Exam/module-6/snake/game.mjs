@@ -78,7 +78,7 @@ function loadGame() {
   cvs.width = GameBoardSize.Cols * SheetData.Head.width;
   cvs.height = GameBoardSize.Rows * SheetData.Head.height;
 
-  GameProps.gameStatus = EGameStatus.Playing; // change game status to Idle
+  GameProps.gameStatus = EGameStatus.Idle; // change game status to Idle
   
   /* Create the game menu here */
   menu = new TMenu(spcvs, SheetData); //Create a menu object using the TMenu blueprint
@@ -96,6 +96,7 @@ function drawGame() {
   spcvs.clearCanvas();
 
   switch (GameProps.gameStatus) {
+    case EGameStatus.Idle:
     case EGameStatus.Playing:
     case EGameStatus.Pause:
       GameProps.bait.draw();
@@ -149,9 +150,13 @@ function onKeyDown(event) {
       GameProps.snake.setDirection(EDirection.Right);
       break;
     case " ":
-      console.log("Space key pressed!");
       /* Pause the game logic here */
-      
+      if(GameProps.gameStatus === EGameStatus.Playing) {
+        GameProps.gameStatus = EGameStatus.Pause;
+      }else if(GameProps.gameStatus === EGameStatus.Pause){
+        GameProps.gameStatus = EGameStatus.Playing;
+      }
+      console.log("Space key pressed!");
       break;
     default:
       console.log(`Key pressed: "${event.key}"`);
