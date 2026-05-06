@@ -4,7 +4,7 @@
 //----------- Import modules, mjs files  ---------------------------------------------------
 //-----------------------------------------------------------------------------------------
 import { TSpriteCanvas } from "libSprite";
-import { TGameBoard, GameBoardSize, TBoardCell } from "./gameBoard.js";
+import { TGameBoard, GameBoardSize, TBoardCell, EBoardCellInfoType } from "./gameBoard.js";
 import { TSnake, EDirection } from "./snake.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";
@@ -41,7 +41,7 @@ export const GameProps = {
   snake: null,
   bait: null,
   score: 0, //Total score
-  currentScore: 100 //Points for bait, starts from 100
+  currentScore: 20 //Points for bait, starts from 100
 
 };
 
@@ -52,6 +52,7 @@ export const GameProps = {
 export function newGame() {
   GameProps.gameBoard = new TGameBoard();
   GameProps.snake = new TSnake(spcvs, new TBoardCell(5, 5)); // Initialize snake with a starting position
+  //GameProps.gameBoard.getCell(5, 5) = new TBoardCellInfo()
   GameProps.bait = new TBait(spcvs); // Initialize bait with a starting position
   gameSpeed = 4; // Reset game speed
 }
@@ -61,7 +62,7 @@ export function baitIsEaten() {
   GameProps.score += GameProps.currentScore;
   console.log("Points earned: ", GameProps.currentScore, "| Total score: ", GameProps.score);
 
-  GameProps.currentScore = 100; // Reset score count
+  GameProps.currentScore = 20; // Reset score count
 
   GameProps.bait.update(); //Move the bait to a new position
   GameProps.snake.grow(); //Make snake grow longer when bait eaten
@@ -121,8 +122,11 @@ function updateGame() {
 }
 
 function increaseGameSpeed() {
+  gameSpeed += 0.5; // Increase speed by
+  clearInterval(hndUpdateGame);
+  hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed);
   /* Increase game speed logic here */
-  console.log("Increase game speed!");
+  console.log("Increase game speed!", gameSpeed);
 }
 
 

@@ -7,7 +7,7 @@ export class TMenu {
 
     constructor(aSpcvs, aSPI) {
         // aSPI.Number shows to the numbers in the sprite sheet
-        this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.Number, 20, 20);
+        this.#spGameScore = new TSpriteNumber(aSpcvs, aSPI.Number, 1, 1, 0, 0);
         this.#spGameScore.justify = ESpriteNumberJustifyType.Left;
         this.#spGameScore.visible = true;
     }
