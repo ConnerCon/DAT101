@@ -71,15 +71,22 @@ class TSnakeHead extends TSnakePart {
     if (this.checkCollision()) {
       return false; // Collision detected, do not continue
     }
+
     // Update the position of the snake element (subclass)
     super.update();
+
     //Check if the snake head is on a bait cell
     const boardCellInfo = GameProps.gameBoard.getCell(this.boardCell.row, this.boardCell.col);
     if(boardCellInfo.infoType === EBoardCellInfoType.Bait) {
       baitIsEaten();
     }else{
-      /* Decrease the score if the snake head is not on a bait cell */
+      if(GameProps.currentScore > 1){
+        GameProps.currentScore --;
+      } 
+      /* Decrease the score if the snake head is not on a bait cell
+      Mininum 1  */
     }
+  
     boardCellInfo.infoType = EBoardCellInfoType.Snake; // Set the cell to Snake
     return true; // No collision, continue
   }

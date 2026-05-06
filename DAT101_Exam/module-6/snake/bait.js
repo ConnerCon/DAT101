@@ -30,6 +30,5 @@ export class TBait extends TSprite {
     this.y = this.#boardCell.row * this.spi.height;
     // Update the bait cell info type to Bait
     GameProps.gameBoard.getCell(this.#boardCell.row, this.#boardCell.col).infoType = EBoardCellInfoType.Bait
-  } // End of update
-
+    } // End of update
 }

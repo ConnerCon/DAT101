@@ -7,6 +7,7 @@ import { TSpriteCanvas } from "libSprite";
 import { TGameBoard, GameBoardSize, TBoardCell } from "./gameBoard.js";
 import { TSnake, EDirection } from "./snake.js";
 import { TBait } from "./bait.js";
+import { TMenu } from "./menu.js";
 
 //-----------------------------------------------------------------------------------------
 //----------- variables and object --------------------------------------------------------
@@ -15,6 +16,7 @@ const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
 let gameSpeed = 4; // Game speed multiplier;
 let hndUpdateGame = null;
+let menu = null;
 export const EGameStatus = { Idle: 0, Playing: 1, Pause: 2, GameOver: 3 };
 
 
@@ -38,7 +40,9 @@ export const GameProps = {
   gameStatus: EGameStatus.Idle,
   snake: null,
   bait: null,
-  score: 0 //Tracks points
+  score: 0, //Total score
+  currentScore: 100 //Points for bait, starts from 100
+
 };
 
 //------------------------------------------------------------------------------------------
@@ -54,13 +58,13 @@ export function newGame() {
 
 
 export function baitIsEaten() {
+  GameProps.score += GameProps.currentScore;
+  console.log("Points earned: ", GameProps.currentScore, "| Total score: ", GameProps.score);
 
-  console.log("Bait eaten!");
-  GameProps.score += 100; // Add 100 to the score, and store it
-  console.log("Score: ", GameProps.score); //Checks if it works
+  GameProps.currentScore = 100; // Reset score count
 
   GameProps.bait.update(); //Move the bait to a new position
-  GameProps.snake.grow();
+  GameProps.snake.grow(); //Make snake grow longer when bait eaten
   increaseGameSpeed(); // Increase game speed
 }
 
@@ -74,8 +78,9 @@ function loadGame() {
   cvs.height = GameBoardSize.Rows * SheetData.Head.height;
 
   GameProps.gameStatus = EGameStatus.Playing; // change game status to Idle
-
-  /* Create the game menu here */ 
+  
+  /* Create the game menu here */
+  menu = new TMenu(spcvs, SheetData); //Create a menu object using the TMenu blueprint
 
   newGame(); // Call this function from the menu to start a new game, remove this line when the menu is ready
 
@@ -94,8 +99,10 @@ function drawGame() {
     case EGameStatus.Pause:
       GameProps.bait.draw();
       GameProps.snake.draw();
+      menu.draw(); // Draw the score on screen
       break;
   }
+  
   // Request the next frame
   requestAnimationFrame(drawGame);
 }
