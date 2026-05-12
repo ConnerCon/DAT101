@@ -88,7 +88,11 @@ export class TMenu {
         // Update the visible score to match the real score
         this.#spGameScore.value = GameProps.score; // Reads GameProps.score
         this.#spGameScore.draw();
-        this.#spGameScore.visible
+        if(GameProps.gameStatus === EGameStatus.Pause, EGameStatus.Playing){
+            this.#spGameScore.visible = true}
+        if(GameProps.gameStatus === EGameStatus.GameOver){
+            this.#spGameScore.visible = false;
+        }
 
         this.#spPlay.draw();
         this.#spResume.visible = GameProps.gameStatus === EGameStatus.Pause; // Resume shows based on GameStatus
@@ -99,6 +103,7 @@ export class TMenu {
         this.#spGameOverScore.value = GameProps.score;
         this.#spGameOverScore.visible = GameProps.gameStatus === EGameStatus.GameOver;
         this.#spGameOverScore.draw();
+
 
         this.#spHome.visible = GameProps.gameStatus === EGameStatus.GameOver; // Home button shows on GameOver
         this.#spHome.draw();

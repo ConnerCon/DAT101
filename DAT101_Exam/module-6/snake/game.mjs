@@ -104,10 +104,12 @@ function drawGame() {
     case EGameStatus.Idle:
     case EGameStatus.Playing:
     case EGameStatus.Pause:
-    case EGameStatus.GameOver:
       GameProps.bait.draw();
       GameProps.snake.draw();
       menu.draw(); // Draw the score on screen
+      break;
+    case EGameStatus.GameOver:
+      menu.draw();
       break;
   }
   
