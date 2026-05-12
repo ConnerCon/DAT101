@@ -41,7 +41,7 @@ export const GameProps = {
   snake: null,
   bait: null,
   score: 0, //Total score
-  currentScore: 20, //Points for bait, starts from 100
+  currentScore: 20, //Points for bait, starts from 20
 
 };
 
