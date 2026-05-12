@@ -14,7 +14,7 @@ import { TMenu } from "./menu.js";
 //-----------------------------------------------------------------------------------------
 const cvs = document.getElementById("cvs");
 const spcvs = new TSpriteCanvas(cvs);
-let gameSpeed = 4; // Game speed multiplier;
+export let gameSpeed = 4; // Game speed multiplier;
 let hndUpdateGame = null;
 let menu = null;
 export const EGameStatus = { Idle: 0, Playing: 1, Pause: 2, GameOver: 3 };
@@ -41,7 +41,7 @@ export const GameProps = {
   snake: null,
   bait: null,
   score: 0, //Total score
-  currentScore: 20 //Points for bait, starts from 100
+  currentScore: 20, //Points for bait, starts from 100
 
 };
 
@@ -54,7 +54,13 @@ export function newGame() {
   GameProps.snake = new TSnake(spcvs, new TBoardCell(5, 5)); // Initialize snake with a starting position
   //GameProps.gameBoard.getCell(5, 5) = new TBoardCellInfo()
   GameProps.bait = new TBait(spcvs); // Initialize bait with a starting position
+
+  GameProps.score = 0; // Reset points
+  GameProps.currentScore = 20; // Reset bait value
+
   gameSpeed = 4; // Reset game speed
+  clearInterval(hndUpdateGame); // Stop old timer
+  hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed); // Reset speed
 }
 
 
@@ -74,7 +80,7 @@ export function baitIsEaten() {
 //----------- functions -------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
 
-function loadGame() {
+export function loadGame() {
   cvs.width = GameBoardSize.Cols * SheetData.Head.width;
   cvs.height = GameBoardSize.Rows * SheetData.Head.height;
 
@@ -87,7 +93,6 @@ function loadGame() {
 
   requestAnimationFrame(drawGame);
   console.log("Game canvas is rendering!");
-  hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed); // Update game every 1000ms / gameSpeed
   console.log("Game canvas is updating!");
 }
 
@@ -99,6 +104,7 @@ function drawGame() {
     case EGameStatus.Idle:
     case EGameStatus.Playing:
     case EGameStatus.Pause:
+    case EGameStatus.GameOver:
       GameProps.bait.draw();
       GameProps.snake.draw();
       menu.draw(); // Draw the score on screen
@@ -123,7 +129,7 @@ function updateGame() {
 }
 
 function increaseGameSpeed() {
-  gameSpeed += 0.5; // Increase speed by
+  gameSpeed += 1; // Increase speed by
   clearInterval(hndUpdateGame);
   hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed);
   /* Increase game speed logic here */

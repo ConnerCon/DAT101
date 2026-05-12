@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------------------
 import { TSprite } from "libSprite";
 import { TPoint } from "lib2d";
-import { GameProps, SheetData, baitIsEaten } from "./game.mjs"
+import { EGameStatus, GameProps, SheetData, baitIsEaten } from "./game.mjs"
 import { TBoardCell, EBoardCellInfoType } from "./gameBoard.js";
 
 //------------------------------------------------------------------------------------------
@@ -70,6 +70,7 @@ class TSnakeHead extends TSnakePart {
     this.index = this.direction;
     if (this.checkCollision()) {
       return false; // Collision detected, do not continue
+      
     }
 
     // Update the position of the snake element (subclass)
@@ -97,7 +98,6 @@ class TSnakeHead extends TSnakePart {
       const boardCellInfo = GameProps.gameBoard.getCell(this.boardCell.row, this.boardCell.col);
       collision = boardCellInfo.infoType === EBoardCellInfoType.Snake;
     }
-    
     return collision; // Collision detected
   }
 }
