@@ -4,7 +4,7 @@
 //----------- Import modules, mjs files  ---------------------------------------------------
 //-----------------------------------------------------------------------------------------
 import { TSpriteCanvas } from "libSprite";
-import { TGameBoard, GameBoardSize, TBoardCell, EBoardCellInfoType } from "./gameBoard.js";
+import { TGameBoard, GameBoardSize, TBoardCell, EBoardCellInfoType, TBoardCellInfo } from "./gameBoard.js";
 import { TSnake, EDirection } from "./snake.js";
 import { TBait } from "./bait.js";
 import { TMenu } from "./menu.js";

@@ -198,6 +198,13 @@ class TSnakeTail extends TSnakePart {
   }
 
   update(){
+    // Tail location
+    const tailRow = this.boardCell.row;
+    const tailCol = this.boardCell.col;
+
+    GameProps.gameBoard.getCell(tailRow, tailCol).infoType = EBoardCellInfoType.Empty; // Empty cell info
+    //Got help from classmate with this ^
+
     switch (this.direction) {
       case EDirection.Up:
         this.boardCell.row--;

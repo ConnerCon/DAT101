@@ -1,13 +1,13 @@
 "use strict";
 import { EGameStatus, GameProps, newGame } from "./game.mjs"; // See the current score
-import { TSpriteNumber, ESpriteNumberJustifyType, TSprite, TSpriteButton, TSpriteButtonHaptic } from "libSprite";   ''
+import { TSpriteNumber, ESpriteNumberJustifyType, TSprite, TSpriteButton, TSpriteButtonHaptic } from "libSprite";
 
 export class TMenu {
     #spGameScore;
     #spPlay;
     #spResume;
     #spGameOver;
-    #spGameOverScore
+    #spGameOverScore;
     #spHome;
     #spRetry;
 
