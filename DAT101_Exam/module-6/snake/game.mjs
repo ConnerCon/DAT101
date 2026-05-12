@@ -129,7 +129,7 @@ function updateGame() {
 }
 
 function increaseGameSpeed() {
-  gameSpeed += 1; // Increase speed by
+  gameSpeed += 0.5; // Increase speed by
   clearInterval(hndUpdateGame);
   hndUpdateGame = setInterval(updateGame, 1000 / gameSpeed);
   /* Increase game speed logic here */
